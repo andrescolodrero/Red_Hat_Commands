@@ -43,3 +43,7 @@ yum install -u autofs
 /home/guests /etc/auto.guests
 
 vim /etc/auto.guests -> we will not use NFS, this is for over the internet
+
+# Add SUDO to an specific command
+grep dwalsh /etc/sudoers
+dwalsh        ALL=(ALL)       NOPASSWD: /usr/bin/docker
