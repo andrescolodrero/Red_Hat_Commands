@@ -74,3 +74,9 @@ PAM -> Plugin auto modules
 
 cd /etc/pam.d 
 -> files to authentication services
+
+# Add SUDO to an specific command
+grep dwalsh /etc/sudoers
+dwalsh        ALL=(ALL)       NOPASSWD: /usr/bin/docker
+
+
