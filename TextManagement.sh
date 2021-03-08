@@ -1,4 +1,17 @@
 # basics fro tail, head, tr, cut, awk, seed
+more
+less
+cat
+
+# Compare fles, strings
+diff -c file1.txt file2.txt
+diff -i /dir1 / dir2
+
+# Compare with comm and sort
+comm <(sort -i file1.txt) <(sort -i file2.txt)
+
+# cmp, show only first difference
+cmp file1.txt  file2.txt
 
 # Cut columns
 cut -f 3 -d : /etc/passwd
