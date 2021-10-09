@@ -1,0 +1,42 @@
+1. ADd new disk to Ubuntu partition.
+2. Rescan for the new DISK:
+    echo "1" > /sys/class/block/sda/device/rescan
+    or
+    echo "1" > /sys/class/block/sdb/device/rescan
+3. Create GUID Partition Table for LVMS bigger than 2TB
+   gparted /dev/sdb
+   (parted) mklabel gpt
+   (parted) unit TB
+    (parted) mkpart primary 0TB 2TB
+    (parted) quit
+ 4. Create Physical Volumes
+    pvcreate /dev/sdb1  (This command designates partition 1 on storage disk b)
+ 5. Create Volume Group (we will assigne all the disk to this group)
+     vgcreate my-vg /dev/sdb1
+     verify
+     vgdisplay my-vg
+  6. Create logical volumen and add all the content of teh disk
+     lvcreate -l 100%FREE -n storage my-vg
+  7. Apply Filesystem
+     mkfs.ext4 storage
+  8. Mount Volume and Assign to fstab
+     mount /storage /dev/sdb1 
+     mount: unknown filesystem type ‘LVM2_member’
+     The disk was partitioned under LVM, so to mount it you need to specify not /dev/sdb1
+     mount /dev/my-vg/storage /artifacts
+     
+     ls -l /dev/disk/by-uuid -> find the UUID of the new disk or use "blkid"
+     add fstab entry:
+     
+     # /storage
+     /dev/disk/by-uuid/8/UUID) /storage ext4 defaults 0 0
+
+     
+     
+    
+ Note:
+ Utilities
+ lsblk
+ cat /proc/partitions
+ lvdisplay
+ 
