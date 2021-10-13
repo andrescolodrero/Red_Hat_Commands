@@ -1,0 +1,8 @@
+1. Add new disk or extend the existing disk
+2. Scan for new disk: echo "1" > /sys/class/block/sda/device/rescan
+3. Add new partition fdisk /dev/sda (or fdisk /dev/sdb if new disk)
+3. lvmdiskscan
+4. Extend VG: vgextend ubuntu-vg /dev/sda7
+5. List the logical volume we want to extend: pvdisplay
+6. Extend: lvextend -l +100%FREE /dev/ubuntu-vg/var-lib
+7. Rresize FileSystem:  resize2fs -p /dev/mapper/ubuntu--vg-var--lib
