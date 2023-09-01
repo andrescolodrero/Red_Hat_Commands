@@ -1,0 +1,12 @@
+sudo:
+he next table summarizes the differences between the su, su -, and sudo commands:
+
+               	  su	          su -	            sudo
+Become new user  	Yes	          Yes	              Per escalated command
+Environment	    Current user's	New user's	      Current user's
+Password required	New user's	New user's	        Current user's
+Privileges	Same as new user	Same as new user	  Defined by configuration
+Activity logged	su command only	su command only	  Per escalated command
+
+check logs:
+sudo tail /var/log/secure
